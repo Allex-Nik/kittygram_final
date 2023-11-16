@@ -16,7 +16,7 @@ services:
     image: allexnik/kittygram_backend
     env_file: .env
     volumes:
-      - static:/static/
+      - static:/backend_static/
       - media:/app/media/
   frontend:
     env_file: .env
