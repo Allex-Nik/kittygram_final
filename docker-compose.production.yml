@@ -10,11 +10,14 @@ services:
   db:
     image: postgres:13.10
     env_file: .env
+    restart: on-failure
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    image: allexnik/kittygram_backend
+    image: allexnik/kittygram_backend:latest
     env_file: .env
+    depends_on:
+      - db
     volumes:
       - static:/backend_static/
       - media:/app/media/
@@ -27,6 +30,8 @@ services:
   gateway:
     image: allexnik/kittygram_gateway
     env_file: .env
+    depends_on:
+      - db
     ports:
       - 9000:80
     volumes:
